@@ -1,10 +1,11 @@
-define(["underscore",
+define(["jquery",
+        "underscore",
         "marionette",
         "collection",
         "views/view-mixin",
         "views/record-detail"
     ],
-    function (_, Marionette, Collection, ViewMixin, RecordView) {
+    function ($, _, Marionette, Collection, ViewMixin, RecordView) {
         'use strict';
         /**
          * Controls a dictionary of overlayGroups
@@ -22,7 +23,7 @@ define(["underscore",
             initialize: function (opts) {
                 this.collection = new Collection({
                     table_id: opts.table_id,
-                    page_size: 100,
+                    page_size: 10,
                     comparator: "ordering"
                 });
                 this.listenTo(this.collection, 'reset', this.renderWithHelpers);
@@ -58,7 +59,14 @@ define(["underscore",
             },
 
             newPage: function (e) {
-                alert("next page");
+                var page_num = $(e.target).attr('href'),
+                    that = this;
+                this.collection.fetch({
+                    data: $.param({ page: page_num }),
+                    success: function () {
+                        that.renderWithHelpers();
+                    }
+                });
                 e.preventDefault();
             }
 

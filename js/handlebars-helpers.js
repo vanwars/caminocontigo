@@ -1,5 +1,5 @@
-define(["handlebars"],
-    function (Handlebars) {
+define(["handlebars", "backbone"],
+    function (Handlebars, Backbone) {
         "use strict";
         Handlebars.registerHelper("ifHasQuotes", function (txt, block) {
             if (txt && txt.indexOf("\"") != -1) {
@@ -28,7 +28,7 @@ define(["handlebars"],
             return new Handlebars.SafeString('style="background-color: ' + color + '"');
         });
 
-        Handlebars.registerHelper("count", function (txt, fa_class) {
+        Handlebars.registerHelper("repeat", function (txt, fa_class) {
             if (!txt) { return ''; }
 
             var found = txt.match(/(\d+):/i),
@@ -42,6 +42,23 @@ define(["handlebars"],
                 }
             }
             return bubbles;
+        });
+
+        Handlebars.registerHelper("paginator", function () {
+            var re = /page=(\d+)/i,
+                previous = null,
+                next = null,
+                html = '';
+            if (this.previous) { previous = this.previous.match(re); }
+            if (this.next) { next = this.next.match(re); }
+            if (previous && previous.length > 1) {
+                html += '<a class="page" href="' + previous[1] + '">previous</a>';
+            }
+            if (next && next.length > 1) {
+                if (html.length > 0) { html += ' | '; }
+                html += '<a class="page" href="' + next[1] + '">next</a>';
+            }
+            return html;
         });
 
 
