@@ -24,6 +24,10 @@ html {
 
 ol, ul {
   list-style: none; }
+  
+a:hover, a:active {
+    text-decoration: none;
+}
 
 table {
   border-collapse: collapse;
@@ -919,7 +923,7 @@ h2 > i {
   
 }
 
-
 .ag-title {
   text-align: center;
 }
+

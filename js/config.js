@@ -37,6 +37,7 @@ var pages = [
         collection_template_path: "scholarship-list.html",
         item_template_path: "scholarship-item.html",
         type: "list",
+        page_size: 5,
         table_id: 9
     },
     {

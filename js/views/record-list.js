@@ -23,8 +23,8 @@ define(["jquery",
             initialize: function (opts) {
                 this.collection = new Collection({
                     table_id: opts.table_id,
-                    page_size: 10,
-                    comparator: "ordering"
+                    page_size: opts.page_size || 10,
+                    comparator: opts.ordering_field || "id"
                 });
                 this.listenTo(this.collection, 'reset', this.renderWithHelpers);
                 this.loadTemplates(opts);
@@ -59,7 +59,7 @@ define(["jquery",
             },
 
             newPage: function (e) {
-                var page_num = $(e.target).attr('href'),
+                var page_num = $(e.target).attr('page-num'),
                     that = this;
                 this.collection.fetch({
                     data: $.param({ page: page_num }),
