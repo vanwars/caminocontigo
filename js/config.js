@@ -54,6 +54,10 @@ var pages = [
     {
         url: "essays",
         template_path: "essays.html"
+    },
+    {
+    	url: "options",
+        template_path: "options.html"
     }
     
 ];
