@@ -55,10 +55,15 @@ define(["underscore",
                 /* Dynamically builds Backbone Routes from the config file */
                 _.each(pages, function (page) {
                     that.routes[page.url] = function () {
-                        $(page.target || that.defaultTarget).html(that.routeViews[page.url].el);
-                        that.addAnimation();
+                        that.loadView(page);
                     };
                 });
+            };
+
+            this.loadView = function (page) {
+                $(page.target || this.defaultTarget).html(this.routeViews[page.url].el);
+                this.routeViews[page.url].delegateEvents();
+                this.addAnimation();
             };
 
             this.addAnimation = function () {
@@ -66,9 +71,11 @@ define(["underscore",
             };
 
             this.addListeners = function () {
+                var that = this;
                 $('#close-project').click(function (e) {
                     $("#explore_section").removeClass("showme");
                     e.preventDefault();
+                    that.appRouter.navigate('home', {trigger: true});
                 });
             };
 
