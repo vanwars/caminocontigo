@@ -911,7 +911,15 @@ a.major_cta {
 }
 .fa-times-circle {
     margin: 5px 5px 0px 0px;
+
+}
+
+h2 > i {
+  color: #000099;
+  
 }
 
 
-
+.ag-title {
+  text-align: center;
+}
