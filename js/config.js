@@ -41,6 +41,12 @@ var pages = [
         table_id: 9
     },
     {
+        url: "scholarships/:id",
+        type: "detail",
+        template_path: "scholarship-detail.html",
+        table_id: 9
+    },
+    {
         url: "outside-school",
         template_path: "extra-curriculars.html"
     },
