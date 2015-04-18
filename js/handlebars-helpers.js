@@ -52,11 +52,14 @@ define(["handlebars", "backbone"],
             if (this.previous) { previous = this.previous.match(re); }
             if (this.next) { next = this.next.match(re); }
             if (previous && previous.length > 1) {
-                html += '<a class="page" href="' + previous[1] + '">previous</a>';
+                html += '<button class="btn page" style="margin-right:10px" page-num="' + previous[1] + '">' +
+                    '<i class="fa fa-angle-double-left"></i> previous' +
+                    '</button>';
             }
             if (next && next.length > 1) {
-                if (html.length > 0) { html += ' | '; }
-                html += '<a class="page" href="' + next[1] + '">next</a>';
+                html += '<button class="btn page" page-num="' + next[1] + '">' +
+                    'next <i class="fa fa-angle-double-right"></i>' +
+                    '</button>';
             }
             return html;
         });

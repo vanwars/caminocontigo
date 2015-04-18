@@ -5,9 +5,8 @@ define(["underscore", "backbone"],
             urlRoot: null,
             initialize: function (opts) {
                 //_.extend(this, opts);
-                this.urlRoot = "http://localhost:7777/api/0/forms/" +
-                                opts.tableID + "/data/" + opts.recordID + "/";
-                //alert(this.urlRoot);
+                this.urlRoot = "http://dev.localground.org/api/0/forms/" +
+                                opts.table_id + "/data/" + opts.recordID + "/";
             },
             url: function () {
                 /*
