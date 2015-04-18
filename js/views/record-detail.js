@@ -1,5 +1,5 @@
-define(["underscore", "marionette", "views/view-mixin", "model"],
-    function (_, Marionette, ViewMixin, Model) {
+define(["underscore", "marionette", "model", "views/view-mixin"],
+    function (_, Marionette, Model, ViewMixin) {
         "use strict";
         var RecordView = Marionette.ItemView.extend({
             model: null,
@@ -8,14 +8,15 @@ define(["underscore", "marionette", "views/view-mixin", "model"],
             },
             onBeforeRender: function () {
                 //console.log("onBeforeRender", this.model);
-                _.extend(this.extras, this.model.toJSON());
+                //_.extend(this.extras, this.model.toJSON());
             },
             initialize: function (opts) {
-                console.log("record-detail");
-                _.extend(this, opts);
                 var that = this;
-                this.validate();
-                //this.model = new Model({ tableID: opts.tableID, recordID: opts.recordID});
+                _.extend(this, opts);
+                this.model = new Model({
+                    table_id: opts.table_id,
+                    recordID: opts.modelID
+                });
                 this.model.fetch({
                     success: function () {
                         _.extend(that.extras, that.model.toJSON());
@@ -25,6 +26,6 @@ define(["underscore", "marionette", "views/view-mixin", "model"],
                 this.render();
             }
         });
-        //_.extend(RecordView.prototype, ViewMixin);
+        _.extend(RecordView.prototype, ViewMixin);
         return RecordView;
     });
