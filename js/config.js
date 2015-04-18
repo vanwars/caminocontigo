@@ -79,6 +79,31 @@ var pages = [
     	url: "options",
         template_path: "options.html",
         target: '.section-content'
+    },
+    {
+    	url: "ucs",
+        template_path: "ucs.html",
+        target: '.section-content'
+    },
+    {
+    	url: "cal-states",
+        template_path: "cal-states.html",
+        target: '.section-content'
+    },
+    {
+    	url: "tech-schools",
+        template_path: "tech-schools.html",
+        target: '.section-content'
+    },
+    {
+    	url: "private-schools",
+        template_path: "private-schools.html",
+        target: '.section-content'
+    },
+    {
+    	url: "ccs",
+        template_path: "community-colleges.html",
+        target: '.section-content'
     }
     
 ];
