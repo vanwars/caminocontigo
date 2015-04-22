@@ -48,6 +48,17 @@ var pages = [
         page_size: 5,
         table_id: 9
     },
+    
+    {
+        url: "colleges",
+        collection_template_path: "college-list.html",
+        item_template_path: "college-item.html",
+        target: '.section-content',
+        type: "list",
+        page_size: 5,
+        table_id: 1
+    },
+    
     {
         url: "scholarships/:id",
         type: "detail",
@@ -55,6 +66,15 @@ var pages = [
         target: '.section-content',
         table_id: 9
     },
+    
+    {
+        url: "colleges/:id",
+        type: "detail",
+        template_path: "college-detail.html",
+        target: '.section-content',
+        table_id: 1
+    },
+    
     {
         url: "outside-school",
         template_path: "extra-curriculars.html",
