@@ -12,6 +12,7 @@ define(["underscore",
             this.routeViews = {};
             this.appRouter = null;
             this.defaultTarget = '.section-content';
+            this.spokesTarget = '.explore_mainnav';
 
             this.init = function (opts) {
                 this.addListeners();
@@ -65,15 +66,44 @@ define(["underscore",
 
             this.loadView = function (page, id) {
                 if (id) { page.modelID = id; }
-                var view = new this.routeViews[page.url](page);
-                $(page.target || this.defaultTarget).html(view.el);
-                view.delegateEvents();
-                this.addAnimation();
+                var View = this.routeViews[page.url],
+                    view = new View(page);
+
+                this.executeTransition(page.target, function () {
+                    $(page.target || this.defaultTarget).html(view.el);
+                    view.delegateEvents();
+                });
             };
 
-            this.addAnimation = function () {
-                $("#explore_section").addClass("showme");
+            this.executeTransition = function (target, callback) {
+                switch (target) {
+                case this.defaultTarget:
+                    this.addAnimation(callback);
+                    break;
+                case this.spokesTarget:
+                    this.switchSpokes(callback);
+                    break;
+                }
             };
+
+            this.addAnimation = function (callback) {
+                $("#explore_section").addClass("showme");
+                callback();
+            };
+
+            this.switchSpokes = function (callback) {
+                var $target = $(this.spokesTarget);
+                $("#explore_section").removeClass("showme");
+                $target.addClass("grow-spokes");
+                setTimeout(function () {
+                    $target.removeClass("grow-spokes").addClass("shrink");
+                    callback();
+                    setTimeout(function () {
+                        $target.addClass("load-spokes");
+                    }, 100);
+                }, 1000);
+            };
+
 
             this.addListeners = function () {
                 var that = this;
