@@ -65,6 +65,10 @@ var pages = [
     {
     	url: "options",
         template_path: "options.html"
+    },
+    {
+    	url: "editprofile",
+        template_path: "editprofile.html"
     }
     
 ];
