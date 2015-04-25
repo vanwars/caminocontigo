@@ -93,15 +93,14 @@ define(["underscore",
 
             this.switchSpokes = function (callback) {
                 var $target = $(this.spokesTarget);
-                $("#explore_section").removeClass("showme");
-                $target.addClass("grow-spokes");
+                $target.removeClass("original").addClass("hide-wheel-right");
                 setTimeout(function () {
-                    $target.removeClass("grow-spokes").addClass("shrink");
-                    callback();
+                    $target.removeClass("hide-wheel-right").addClass("hide-wheel-left");
                     setTimeout(function () {
-                        $target.addClass("load-spokes");
-                    }, 100);
-                }, 1000);
+                        $target.removeClass("hide-wheel-left").addClass("original");
+                        callback();
+                    }, 40);
+                }, 500);
             };
 
 
@@ -112,6 +111,10 @@ define(["underscore",
                     e.preventDefault();
                     that.appRouter.navigate('home', {trigger: true});
                 });
+
+                /*$('.nav-icon').click(function () {
+                    $(this).addClass('active').siblings().removeClass('active');
+                });*/
             };
 
             //call init upon initialization:

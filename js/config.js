@@ -30,6 +30,11 @@ var pages = [
         target: '.explore_mainnav'
     },
     {
+        url: "learn",
+        template_path: "spokes.html",
+        target: '.explore_mainnav'
+    },
+    {
         url: "help",
         template_path: "help.html",
         target: '.section-content'
