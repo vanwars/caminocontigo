@@ -50,8 +50,8 @@ var pages = [
         item_template_path: "scholarship-item.html",
         target: '.section-content',
         type: "list",
-        page_size: 5,
-        table_id: 9
+        page_size: 15,
+        table_id: 10
     },
     
     {
@@ -60,7 +60,7 @@ var pages = [
         item_template_path: "college-item.html",
         target: '.section-content',
         type: "list",
-        page_size: 5,
+        page_size: 15,
         table_id: 1
     },
     
@@ -134,6 +134,11 @@ var pages = [
     	url: "ccs",
         template_path: "community-colleges.html",
         target: '.section-content'
+    },
+    {
+    	url: "plan",
+        template_path: "spokes-plan.html",
+        target: ".explore_mainnav"
     }
     
 ];
