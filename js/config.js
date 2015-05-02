@@ -13,7 +13,7 @@ var pages = [
         className: "navwrapper cf"
     },
     {
-        template_path: "spokes.html",
+        template_path: "spokes-dream.html",
         target: ".explore_mainnav"  //loads spokes menu into the .explore_mainnav div
     },
     {

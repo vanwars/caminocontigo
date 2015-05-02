@@ -446,7 +446,7 @@ h2 {
     width: 100px;
 }
 .globalnav a:hover {
-  background-color: #424242;
+  background-color: #1c1c1c;
 }
 .globalnav a.selected, .globalnav a:active {
   background-color: #1c1c1c;

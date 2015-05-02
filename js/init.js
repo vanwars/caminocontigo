@@ -1,46 +1,42 @@
 define(["underscore",
         "jquery",
         "backbone",
+        "marionette",
         "views/base",
         "views/record-list",
         "views/record-detail"
     ],
-    function (_, $, Backbone, BaseView, RecordListView, RecordDetailView) {
+    function (_, $, Backbone, Marionette, BaseView, RecordListView, RecordDetailView) {
         "use strict";
-        var App = function (opts) {
-            this.routes = {};
-            this.routeViews = {};
-            this.appRouter = null;
-            this.defaultTarget = '.section-content';
-            this.spokesTarget = '.explore_mainnav';
+        var App = new Marionette.Application();
+        _.extend(App, {
+            pages: {},
+            routes: {},
+            routeViews: {},
+            appRouter: null,
+            defaultTarget: '.section-content',
+            spokesTarget: '.explore_mainnav',
 
-            this.init = function (opts) {
-                this.addListeners();
-                this.buildViews(opts.pages);
-                this.buildRoutes(opts.pages);
-                var AppRouter = Backbone.Router.extend({
-                    routes: this.routes
-                });
-                this.appRouter = new AppRouter();
-                Backbone.history.start();
-            };
-
-            this.buildViews = function (pages) {
+            buildViews: function (pages) {
                 var that = this;
                 /* Dynamically builds Backbone Views from the config file */
                 _.each(pages, function (page) {
                     var View = that.getView(page),
-                        v; // = new View(page);
+                        v;
                     if (page.url) {
-                        that.routeViews[page.url] = View; //v;
+                        that.routeViews[page.url] = View;
                     } else {
                         v = new View(page);
                         $(page.target || that.defaultTargets).html(v.el);
+                        v.delegateEvents();
+                        setTimeout(that.addListeners.bind(that), 1000);
                     }
                 });
-            };
-
-            this.getView = function (page) {
+            },
+            getPageByRoute: function (route) {
+                alert(this.pages[route]);
+            },
+            getView: function (page) {
                 switch (page.type) {
                 case "list":
                     return RecordListView.extend(page);
@@ -49,12 +45,13 @@ define(["underscore",
                 default:
                     return BaseView.extend(page);
                 }
-            };
+            },
 
-            this.buildRoutes = function (pages) {
+            buildRoutes: function (pages) {
                 var that = this;
                 /* Dynamically builds Backbone Routes from the config file */
                 _.each(pages, function (page) {
+                    that.pages[page.url] = page;
                     if (page.type == "detail") {
                         page.modelID = page.id;
                     }
@@ -62,64 +59,76 @@ define(["underscore",
                         that.loadView(page, id);
                     };
                 });
-            };
+            },
 
-            this.loadView = function (page, id) {
+            loadView: function (page, id) {
                 if (id) { page.modelID = id; }
                 var View = this.routeViews[page.url],
                     view = new View(page);
+                $(page.target || this.defaultTarget).html(view.el);
+                view.delegateEvents();
+                this.executeTransition(page.target);
+                //remove and re-add event listeners:
+                this.addListeners();
+                this.highlightSelected(page);
+            },
 
-                this.executeTransition(page.target, function () {
-                    $(page.target || this.defaultTarget).html(view.el);
-                    view.delegateEvents();
-                });
-            };
-
-            this.executeTransition = function (target, callback) {
+            executeTransition: function (target) {
                 switch (target) {
                 case this.defaultTarget:
-                    this.addAnimation(callback);
-                    break;
-                case this.spokesTarget:
-                    this.switchSpokes(callback);
+                    $("#explore_section").addClass("showme");
                     break;
                 }
-            };
+            },
 
-            this.addAnimation = function (callback) {
-                $("#explore_section").addClass("showme");
-                callback();
-            };
-
-            this.switchSpokes = function (callback) {
+            switchSpokes: function () {
                 var $target = $(this.spokesTarget);
                 $target.removeClass("original").addClass("hide-wheel-right");
                 setTimeout(function () {
                     $target.removeClass("hide-wheel-right").addClass("hide-wheel-left");
                     setTimeout(function () {
                         $target.removeClass("hide-wheel-left").addClass("original");
-                        callback();
                     }, 40);
                 }, 500);
-            };
+            },
 
-
-            this.addListeners = function () {
+            addListeners: function () {
                 var that = this;
+
+                $("#close-project").unbind("click");
                 $('#close-project').click(function (e) {
                     $("#explore_section").removeClass("showme");
                     e.preventDefault();
                     that.appRouter.navigate('home', {trigger: true});
                 });
 
-                /*$('.nav-icon').click(function () {
-                    $(this).addClass('active').siblings().removeClass('active');
-                });*/
-            };
+                $(".nav-icon").unbind("click");
+                $('.nav-icon').click(function () {
+                    if ($(this).hasClass("load-spokes")) {
+                        that.switchSpokes();
+                    }
+                });
+            },
+            highlightSelected: function (page) {
+                var url = '#/' + page.url,
+                    $elem = $('a[href="' + url + '"]');
+                setTimeout(function () {
+                    if ($elem.length > 0) {
+                        $elem.addClass('active').siblings().removeClass('active');
+                    }
+                }, 500);
+            }
+        });
 
-            //call init upon initialization:
-            this.init(opts);
-        };
+        App.addInitializer(function (opts) {
+            this.buildViews(opts.pages);
+            this.buildRoutes(opts.pages);
+            var AppRouter = Backbone.Router.extend({
+                routes: this.routes
+            });
+            this.appRouter = new AppRouter();
+            Backbone.history.start();
+        });
         return App;
     });
 
