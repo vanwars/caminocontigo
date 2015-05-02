@@ -56,7 +56,7 @@ var pages = [
         target: '.section-content',
         type: "list",
         page_size: 5,
-        table_id: 1
+        table_id: 13
     },
     
     {
@@ -72,7 +72,7 @@ var pages = [
         type: "detail",
         template_path: "college-detail.html",
         target: '.section-content',
-        table_id: 1
+        table_id: 13
     },
     
     {

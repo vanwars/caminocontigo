@@ -1,20 +1,40 @@
 <h2>{{ name }}</h2>
 <table class="table">
     <tr>
-        <th>Average GPA:</th>
-        <td>{{ average_gpa_unweighted }}</td>
+        <th>Institution Type:</th>
+        <td>{{ institution_type }}</td>
     </tr>
     <tr>
-        <th>Address:</th>
-        <td>{{ address }}</td>
+        <th>Admission Rate:</th>
+        <td>{{ admission_rate }}</td>
+    </tr>
+    <tr>
+        <th>Admission Deadline:</th>
+        <td>{{ admission_deadline }}</td>
+    </tr>
+    <tr>
+        <th>Average GPA:</th>
+        <td>{{ average_gpa }}</td>
+    </tr>
+    <tr>
+        <th>SAT Math:</th>
+        <td>{{ sat_math }}</td>
+    </tr>
+    <tr>
+        <th>SAT Reading:</th>
+        <td>{{ sat_reading }}</td>
+    </tr>
+    <tr>
+        <th>SAT Writing</th>
+        <td>{{ sat_writing }}</td>
+    </tr>
+    <tr>
+        <th>Cost of Attendance:</th>
+        <td>{{ cost_of_attendance }}</td>
     </tr>
     <tr>
         <th>Website:</th>
-        <td><a href="{{ more_info }}"> More Info </a></td>
-    </tr>
-    <tr>
-        <th>Famous Majors:</th>
-        <td>{{ famous_majors }}</td>
+        <td><a href="http://{{ website }}"> click here! </a></td>
     </tr>
 </table>
 <br /><br />
