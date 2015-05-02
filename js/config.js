@@ -13,7 +13,7 @@ var pages = [
         className: "navwrapper cf"
     },
     {
-        template_path: "spokes.html",
+        template_path: "spokes-dream.html",
         target: ".explore_mainnav"  //loads spokes menu into the .explore_mainnav div
     },
     {
@@ -27,6 +27,11 @@ var pages = [
     {
         url: "dream",
         template_path: "spokes-dream.html",
+        target: '.explore_mainnav'
+    },
+    {
+        url: "learn",
+        template_path: "spokes.html",
         target: '.explore_mainnav'
     },
     {
@@ -45,20 +50,18 @@ var pages = [
         item_template_path: "scholarship-item.html",
         target: '.section-content',
         type: "list",
-        page_size: 5,
-        table_id: 9
+        page_size: 15,
+        table_id: 10
     },
-    
     {
         url: "colleges",
         collection_template_path: "college-list.html",
         item_template_path: "college-item.html",
         target: '.section-content',
         type: "list",
-        page_size: 5,
+        page_size: 15,
         table_id: 13
     },
-    
     {
         url: "scholarships/:id",
         type: "detail",
@@ -66,7 +69,6 @@ var pages = [
         target: '.section-content',
         table_id: 9
     },
-    
     {
         url: "colleges/:id",
         type: "detail",
@@ -74,7 +76,6 @@ var pages = [
         target: '.section-content',
         table_id: 13
     },
-    
     {
         url: "outside-school",
         template_path: "extra-curriculars.html",
@@ -129,6 +130,11 @@ var pages = [
     	url: "ccs",
         template_path: "community-colleges.html",
         target: '.section-content'
+    },
+    {
+    	url: "plan",
+        template_path: "spokes-plan.html",
+        target: ".explore_mainnav"
     }
     
 ];

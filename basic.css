@@ -413,6 +413,9 @@ h2 {
     -webkit-font-smoothing: antialiased;
     padding: 12px 5px;
 }
+.active {
+    background-color: #1c1c1c;
+}
 .nav-icon .icon {
     display: block;
     font-size: 28px;
@@ -443,7 +446,7 @@ h2 {
     width: 100px;
 }
 .globalnav a:hover {
-  background-color: #424242;
+  background-color: #1c1c1c;
 }
 .globalnav a.selected, .globalnav a:active {
   background-color: #1c1c1c;
@@ -493,7 +496,8 @@ h2 {
 #contact .nav-film,
 #screenings .nav-film,
 #shop a.nav-shop {
-  background-color: #1c1c1c; }
+  background-color: #1c1c1c;
+}
 
 .topnav {
     display: block;
