@@ -135,6 +135,11 @@ var pages = [
     	url: "plan",
         template_path: "spokes-plan.html",
         target: ".explore_mainnav"
+    },
+    {
+    	url: "editpassword",
+        template_path: "editpassword.html",
+        target: '.section-content'
     }
     
 ];
