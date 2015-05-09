@@ -51,7 +51,7 @@ var pages = [
         target: '.section-content',
         type: "list",
         page_size: 15,
-        table_id: 10
+        table_id: 9
     },
     {
         url: "colleges",
