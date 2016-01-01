@@ -19,7 +19,7 @@ define(["underscore", "backbone"],
             },
             initialize: function (opts) {
                 _.extend(this, opts);
-                this.url = 'http://dev.localground.org/api/0/forms/' + this.table_id + '/data/?page_size=' + this.page_size;
+                this.url = 'https://dev.localground.org/api/0/forms/' + this.table_id + '/data/?page_size=' + this.page_size;
             },
             parse: function (response) {
                 this.count = response.count;
